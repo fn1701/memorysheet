@@ -19,9 +19,9 @@
 % the margin of the page (the space between the border of the page and the border of the memorysheet)
 \def\margin{5mm}
 % the width of each bucket
-\def\bereichsbreite{4cm}
+\def\bereichsbreite{4.1cm}
 % the title text
-\def\titletext{\sffamily Merkzettel von: \rule{3cm}{0.4pt}}
+% \def\titletext{\sffamily Merkzettel von: \rule{3cm}{0.4pt}}
 % the amount of pages to be generated (two pages equal one double sided sheet and is the default)
 \def\pageamount{2}
 % whether or not to print page numbers. default is true
@@ -42,8 +42,8 @@
 \colorlet{vspacercolor}{fgcolor}
 
 % and here you can redefine the thickness of the lines
-\def\borderthickness{2pt}
-\def\spacerthickness{2pt}
+\def\borderthickness{1pt}
+\def\spacerthickness{1pt}
 
 %%----------------------------%%
 %%--Stilistische Anpassungen--%%
@@ -82,28 +82,28 @@
         % vertical Spacers
         \foreach [count=\j]\i in {0,\bereichsbreite,...,\paperwidth} {
             % \ifnum\j<8\relax
-            \draw[vspacercolor,line width=\spacerthickness]([xshift=\i,yshift=-1.5cm]mempage.north west)--([xshift=\i]mempage.south west);
+            \draw[vspacercolor,line width=\spacerthickness]([xshift=\i,yshift=0cm]mempage.north west)--([xshift=\i]mempage.south west);
             % \fi
         }
 
         % horizontal Spacer
-        \draw[hspacercolor,line width=\spacerthickness]([yshift=-1.5cm]mempage.north west)--([yshift=-1.5cm]mempage.north east);
+        % \draw[hspacercolor,line width=\spacerthickness]([yshift=-1.5cm]mempage.north west)--([yshift=-1.5cm]mempage.north east);
 
         % Border
         \draw[bordercolor,line width=\borderthickness](mempage.north west) rectangle (mempage.south east);
 
         % Title box
-        \node[fill=\thepagecolor,draw=bordercolor,line width=\borderthickness,anchor=north, outer sep=0pt] at ([yshift=-\margin]current page.north) {\titletext};
+        % \node[fill=\thepagecolor,draw=bordercolor,line width=\borderthickness,anchor=north, outer sep=0pt] at ([yshift=-\margin]current page.north) {\titletext};
 
         % Page number
-        \ifthenelse{\boolean{printpagenumbers}}{
-            \node[anchor=south,outer sep=0pt,fill=\thepagecolor,draw=bordercolor,line width=\borderthickness] at (mempage.south) {Seite \thepage};
-        }{}
+        % \ifthenelse{\boolean{printpagenumbers}}{
+        %     \node[anchor=south,outer sep=0pt,fill=\thepagecolor,draw=bordercolor,line width=\borderthickness] at (mempage.south) {Seite \thepage};
+        % }{}
 
         % Credits
-        \ifthenelse{\boolean{printcredits}}{
-            \node[anchor=south,outer sep=0pt,font=\scriptsize] at ([yshift=-1.5cm]mempage.north) {Created with: \url{https://github.com/Rdeisenroth/memorysheet}};
-        }{}
+        % \ifthenelse{\boolean{printcredits}}{
+        %     \node[anchor=south,outer sep=0pt,font=\scriptsize] at ([yshift=-1.5cm]mempage.north) {Created with: \url{https://github.com/Rdeisenroth/memorysheet}};
+        % }{}
     \end{tikzpicture}
 }
 \ifnum\pageamount<1\relax
@@ -115,8 +115,8 @@
 %%-------------------------%%
 
 \begin{document}
-    \memorysheetpage%
-    \foreach \i in {2,...,\pageamount}{%
+\memorysheetpage%
+\foreach \i in {2,...,\pageamount}{%
         \clearpage%
         \memorysheetpage%
     }%
